@@ -1,0 +1,22 @@
+version: '3.5'
+
+services:
+  web:
+    build:
+      context: .
+      target: dev
+    command: flask run --host=0.0.0.0
+    volumes:
+      - .:/project
+    environment:
+      - SQLALCHEMY_DATABASE_URI=postgres://postgres@db:5432/postgres
+      - FLASK_ENV=development
+      - FLASK_APP=app
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
+    restart: unless-stopped
+
+  db:
+    image: postgres:10.6-alpine
