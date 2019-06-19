@@ -29,16 +29,23 @@
 export default {
     name: 'Products',
     data() {
+        let url = undefined;
+        if (process.env.NODE_ENV === 'production') {
+            url = 'http://zymud.pythonanywhere.com';
+        } else {
+            url = 'http://0.0.0.0:5000';
+        }
         return {
             shopping_items: [{ id: 1, name: 'test' }],
             new_name: null,
             new_quantity: null,
             new_measurment: null,
             error: null,
+            url,
         }
     },
     mounted() {
-        const url = 'http://0.0.0.0:5000/shopping_list';
+        const url = `${this.url}/shopping_list`;
         fetch(url, {
                 mode: 'cors',
                 headers: new Headers({
@@ -52,7 +59,7 @@ export default {
     },
     methods: {
         done(item) {
-            const url = 'http://0.0.0.0:5000/shopping_list/remove_item';
+            const url = `${this.url}/shopping_list/remove_item`;
             fetch(url, {
                     mode: 'cors',
                     headers: new Headers({
@@ -75,7 +82,7 @@ export default {
                 this.error = 'Quantity should be a number';
                 return;
             }
-            const url = 'http://0.0.0.0:5000/shopping_list/add_item';
+            const url = `${this.url}/shopping_list/add_item`;
             const data = {
                 name: this.new_name,
                 quantity: this.new_quantity,
