@@ -18,7 +18,7 @@
         <br />
         <br />
         <ul class="list-group">
-            <li class="list-group-item" v-for="item in shopping_items">
+            <li class="list-group-item" v-for="item in shopping_items" v-key="item.id">
                 <button type="button" class="btn btn-success" @click=done(item)>Done</button>
                 {{ item.name }}
             </li>
@@ -61,7 +61,7 @@ export default {
                     method: 'POST',
                     body: JSON.stringify({ shopping_item_id: item.id }),
                 })
-                .then(data => {
+                .then(() => {
                     this.shopping_items = this.shopping_items.filter(i => i.id !== item.id);
                 })
         },
@@ -71,7 +71,7 @@ export default {
                 this.error = 'Quantity and name should be defined';
                 return;
             }
-            if (!!isNaN(this.new_quantity)) {
+            if (isNaN(this.new_quantity)) {
                 this.error = 'Quantity should be a number';
                 return;
             }
