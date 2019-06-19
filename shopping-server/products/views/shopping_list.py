@@ -1,6 +1,6 @@
 import json
 
-from flask import Blueprint, jsonify, request, send_from_directory, send_file
+from flask import Blueprint, jsonify, request
 
 from ..bl import shopping_list
 

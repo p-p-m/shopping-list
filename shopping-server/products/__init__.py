@@ -1,4 +1,4 @@
-from flask import Flask, send_from_directory
+from flask import Flask
 from flask_cors import CORS
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
@@ -30,7 +30,3 @@ def register_extensions(app):
 def register_views(app):
     from .views import shopping_list
     app.register_blueprint(shopping_list.blueprint)
-
-    @app.route('/')
-    def index():
-        return send_from_directory(app.static_folder, 'index.html')
