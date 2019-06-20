@@ -18,9 +18,10 @@
         <br />
         <br />
         <ul class="list-group">
-            <li class="list-group-item" v-for="item in shopping_items" v-key="item.id">
+            <li class="list-group-item" v-for="item in shopping_items" v-bind:key="item.id">
                 <button type="button" class="btn btn-success" @click=done(item)>Done</button>
                 {{ item.name }}
+                <small v-if="item.measurment">{{ item.measurment }}</small>
             </li>
         </ul>
     </div>

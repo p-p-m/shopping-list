@@ -7,19 +7,12 @@ from ..bl import shopping_list
 blueprint = Blueprint('shopping_list', __name__)
 
 
-def _format_quantity(quantity):
-    return format(quantity, '.2f')
-
-
 def _serialize_shopping_item(shopping_item):
-    quantity = _format_quantity(shopping_item.quantity)
-    name = f'{shopping_item.product.name} - {quantity}'
-    measurement = shopping_item.product.measurement
-    if measurement:
-        name += f' {measurement}'
     return {
         'id': shopping_item.id,
-        'name': name,
+        'name': shopping_item.product.name,
+        'measurement': shopping_item.product.measurement,
+        'quantity': str(shopping_item.quantity),
     }
 
 
