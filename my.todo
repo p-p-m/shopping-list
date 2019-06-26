@@ -1,3 +1,6 @@
  ✔ Create deploy.sh file that will collect static, push it to github and describe future actions. @done (19-06-20 22:36)
- ☐ Fix measurments display.
- ☐ Discuss with Julia what to do next.
+ ✔ Fix measurments display. @done (19-06-26 23:14)
+ ✔ Discuss with Julia what to do next. @done (19-06-26 23:14)
+ ☐ autocomplete measurement based on product
+ ☐ add polling
+ ☐ allow to use application offline

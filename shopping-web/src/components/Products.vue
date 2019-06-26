@@ -51,6 +51,7 @@ export default {
             base_url,
             all_measurements: [],
             all_products: [],
+            autocomplete: {},
         }
     },
     mounted() {
@@ -60,16 +61,12 @@ export default {
             this.shopping_items = data;
         });
 
-        this._fetch('/product/all_measurements')
+        this._fetch('/product/autocomplete')
         .then(response => response.json())
         .then(data => {
-            this.all_measurements = data;
-        });
-
-        this._fetch('/product/all_names')
-        .then(response => response.json())
-        .then(data => {
-            this.all_products = data;
+            this.autocomplete = autocomplete;
+            this.all_products = Object.keys(data);
+            this.all_measurements = [...new Set(Object.values(data))];
         });
     },
     methods: {

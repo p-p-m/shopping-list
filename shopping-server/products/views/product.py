@@ -5,20 +5,10 @@ from ..bl import product
 blueprint = Blueprint('product', __name__)
 
 
-def _serialize_shopping_item(shopping_item):
-    return {
-        'id': shopping_item.id,
-        'name': shopping_item.product.name,
-        'measurement': shopping_item.product.measurement,
-        'quantity': str(shopping_item.quantity),
-    }
+def _serialize_product(p):
+    return {'name': p.name, 'measurement': p.measurement}
 
 
-@blueprint.route('/product/all_names', methods=('GET', ))
-def list_all_names():
-    return jsonify(list(product.get_all_names()))
-
-
-@blueprint.route('/product/all_measurements', methods=('GET', ))
-def list_all_measurements():
-    return jsonify(list(product.get_all_measurements()))
+@blueprint.route('/product/autocomplete', methods=('GET', ))
+def autocomplete():
+    return jsonify(product.get_autocomplete())
