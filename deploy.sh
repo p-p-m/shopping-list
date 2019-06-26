@@ -13,5 +13,5 @@ git commit -m 'Yet another release'
 git push origin master
 
 echo 'Now go and deploy.'
-open https://www.pythonanywhere.com/user/zymud/consoles/12746175/
 open https://www.pythonanywhere.com/user/zymud/webapps/#tab_id_zymud_pythonanywhere_com
+open https://www.pythonanywhere.com/user/zymud/consoles/12746175/

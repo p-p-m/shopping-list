@@ -1,3 +1,4 @@
+from sqlalchemy.orm import load_only
 from sqlalchemy.orm.exc import NoResultFound
 
 from .. import db
@@ -27,3 +28,14 @@ def get_or_create(name, measurement=None):
         db.session.add(product)
         db.session.commit()
     return product
+
+
+def get_all_names():
+    return set(p.name for p in Product.query.options(load_only('name')))
+
+
+def get_all_measurements():
+    return set(
+        p.measurement for p in Product.query.options(load_only('measurement'))
+        if p.measurement
+    )

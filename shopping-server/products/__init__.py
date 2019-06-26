@@ -28,5 +28,6 @@ def register_extensions(app):
 
 
 def register_views(app):
-    from .views import shopping_list
+    from .views import shopping_list, product
     app.register_blueprint(shopping_list.blueprint)
+    app.register_blueprint(product.blueprint)
