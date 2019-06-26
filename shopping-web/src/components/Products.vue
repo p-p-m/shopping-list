@@ -11,10 +11,10 @@
                 </datalist>
             </div>
             <div class="form-group">
-                <input type="text" v-model="new_quantity" class="form-control" id="quantity" placeholder="quantity (required)">
+                <input type="number" min="0" step="1" v-model="new_quantity" class="form-control" id="quantity" placeholder="quantity (required)">
             </div>
             <div class="form-group">
-                <input list="measurements" autocomplete=off type="text" v-model="new_measurement" class="form-control" id="measurement" placeholder="measurement">
+                <input list="measurements" autocomplete=off type="text" v-model="new_measurement" class="form-control lowercase" id="measurement" placeholder="measurement" pattern="[a-z]*">
                 <datalist id="measurements">
                     <option v-for="m in all_measurements" v-bind:key="m">{{ m }}</option>
                 </datalist>
@@ -123,3 +123,9 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+    .lowercase {
+        text-transform: lowercase;
+    }
+</style>
