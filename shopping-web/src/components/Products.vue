@@ -64,7 +64,7 @@ export default {
         this._fetch('/product/autocomplete')
         .then(response => response.json())
         .then(data => {
-            this.autocomplete = autocomplete;
+            this.autocomplete = data;
             this.all_products = Object.keys(data);
             this.all_measurements = [...new Set(Object.values(data))];
         });
