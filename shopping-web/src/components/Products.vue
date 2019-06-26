@@ -7,7 +7,7 @@
             <div class="form-group">
                 <input list="products" autocomplete=off type="text" v-model="new_name" class="form-control" id="name" placeholder="name (required)">
                 <datalist id="products">
-                    <option v-for="p in all_products">{{ p }}</option>
+                    <option v-for="p in all_products" v-bind:key="p">{{ p }}</option>
                 </datalist>
             </div>
             <div class="form-group">
@@ -16,7 +16,7 @@
             <div class="form-group">
                 <input list="measurements" autocomplete=off type="text" v-model="new_measurement" class="form-control" id="measurement" placeholder="measurement">
                 <datalist id="measurements">
-                    <option v-for="m in all_measurements">{{ m }}</option>
+                    <option v-for="m in all_measurements" v-bind:key="m">{{ m }}</option>
                 </datalist>
             </div>
             <button type="button" class="btn btn-primary" @click=add()>Add item</button>
