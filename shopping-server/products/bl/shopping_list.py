@@ -30,8 +30,11 @@ def add_item(shopping_list_id, name, quantity, measurement=None):
 
 
 def remove_item(shopping_item_id):
-    db.session.query(ShoppingItem).filter(
-        ShoppingItem.id.in_(shopping_item_id)).delete(synchronize_session='fetch')
+    (
+        db.session.query(ShoppingItem)
+        .filter(ShoppingItem.id.in_(shopping_item_id))
+        .delete(synchronize_session='fetch')
+    )
     db.session.commit()
 
 

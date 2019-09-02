@@ -28,3 +28,17 @@ class ShoppingItem(Base):
 class ShoppingList(Base):
     shopping_items = db.relationship('ShoppingItem',
                                      back_populates='shopping_list')
+
+
+class RecipeItem(Base):
+    recipe_id = db.Column(db.Integer, db.ForeignKey('recipe.id'))
+    recipe = db.relationship('Recipe', back_populates='recipe_items')
+    product_id = db.Column(db.Integer, db.ForeignKey('product.id'))
+    product = db.relationship('Product')
+    quantity = db.Column(db.Float(precision=5, asdecimal=True))
+
+
+class Recipe(Base):
+    name = db.Column(db.String(128))
+    description = db.Column(db.Text)
+    recipe_items = db.relationship('RecipeItem', back_populates='recipe')

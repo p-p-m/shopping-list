@@ -2,5 +2,6 @@
  ✔ Fix measurments display. @done (19-06-26 23:14)
  ✔ Discuss with Julia what to do next. @done (19-06-26 23:14)
  ☐ autocomplete measurement based on product
+ ☐ limit visible choices on the phone to be able to cancel
  ☐ add polling
  ☐ allow to use application offline
