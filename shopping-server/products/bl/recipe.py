@@ -15,7 +15,7 @@ def _add_items(recipe_id, items):
     for item in items:
         try:
             product = Product.query.filter(name=item['name']).all()[0]
-        except KeyError:
+        except IndexError:
             product = Product(
                 name=item['name'],
                 measurement=item.get('measurement')

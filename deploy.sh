@@ -12,6 +12,8 @@ git add -A
 git commit -m 'Yet another release'
 git push origin master
 
-echo 'Now go and deploy.'
+echo 'Now go and deploy:'
+echo '1. Pull latest master on the server.'
+echo '2. Click reload in admin page.'
 open https://www.pythonanywhere.com/user/zymud/webapps/#tab_id_zymud_pythonanywhere_com
 open https://www.pythonanywhere.com/user/zymud/consoles/12746175/

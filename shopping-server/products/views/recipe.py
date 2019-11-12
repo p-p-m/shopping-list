@@ -15,13 +15,14 @@ def _serialize_recipe(recipe):
             {
                 'name': item.product.name,
                 'quantity': item.quantity,
+                'measurement': item.measurement,
             }
             for item in recipe.recipe_items
         ]
     }
 
 
-@blueprint.route('/recipe/add_item', methods=('POST', ))
+@blueprint.route('/recipe/create', methods=('POST', ))
 def add_recipe():
     data = json.loads(request.data)
     _recipe = recipe.create(
