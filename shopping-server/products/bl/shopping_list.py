@@ -38,6 +38,11 @@ def remove_item(shopping_item_id):
     db.session.commit()
 
 
+def comfirm_item(shopping_item_id):
+    # TODO: create historical record
+    remove_item(shopping_item_id)
+
+
 def get_items(shopping_list_id):
     return ShoppingItem.query.filter(
         ShoppingItem.shopping_list_id == shopping_list_id).all()

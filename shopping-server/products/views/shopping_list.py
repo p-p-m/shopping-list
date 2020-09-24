@@ -43,3 +43,10 @@ def remove_item():
     data = json.loads(request.data)
     shopping_list.remove_item([data['shopping_item_id']])
     return ('', 204)
+
+
+@blueprint.route('/shopping_list/confirm_item', methods=('POST', ))
+def confirm_item():
+    data = json.loads(request.data)
+    shopping_list.remove_item([data['shopping_item_id']])
+    return ('', 204)

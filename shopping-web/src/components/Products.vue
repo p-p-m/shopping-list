@@ -19,20 +19,29 @@
                     <option v-for="m in all_measurements" v-bind:key="m">{{ m }}</option>
                 </datalist>
             </div>
-            <button type="button" class="btn btn-primary" @click=add()>Add item</button>
+            <button type="button" class="btn btn-primary btn-block" @click=add()>Add item</button>
         </form>
         <br />
         <br />
         <ul class="list-group">
-            <li class="list-group-item" v-for="item in shopping_items" v-bind:key="item.id">
-                <button type="button" class="btn btn-success" @click=done(item)>Done</button>
-                {{ item.name }} - {{ parseFloat(item.quantity).toFixed(3) }}
-                <small v-if="item.measurement">{{ item.measurement }}</small>
+            <li class="list-group-item d-flex justify-content-between border-0 my-1 p-0 align-text-bottom" v-for="item in shopping_items" v-bind:key="item.id">
+                <button type="button" class="btn btn-light text-danger" @click=remove(item)>❌</button>
+                <div class="align-self-center">
+                    {{ item.name }} - {{ parseFloat(item.quantity).toFixed(3) }}
+                    <small v-if="item.measurement">{{ item.measurement }} {{ item.type }}</small>
+                </div>
+                <button type="button" class="btn btn-light text-success" @click=confirm(item)>✔</button>
             </li>
         </ul>
     </div>
 </template>
 <script>
+const item_types = {
+    DEFAULT: 'DEFAULT',
+    REMOVED: 'REMOVED',
+    CONFIRMED: 'CONFIRMED',
+}
+
 export default {
     name: 'Products',
     data() {
@@ -43,7 +52,7 @@ export default {
             base_url = 'http://0.0.0.0:5000';
         }
         return {
-            shopping_items: [{ id: 1, name: 'test' }],
+            shopping_items: [],
             new_name: null,
             new_quantity: null,
             new_measurement: null,
@@ -58,7 +67,9 @@ export default {
         this._fetch('/shopping_list')
         .then(response => response.json())
         .then(data => {
-            this.shopping_items = data;
+            this.shopping_items = data.map(item => {
+                return {...item, type: item_types.DEFAULT};
+            });
         });
 
         this._fetch('/product/autocomplete')
@@ -80,7 +91,19 @@ export default {
                 ...options
             })
         },
-        done(item) {
+        confirm(item) {
+            item.type = item_types.CONFIRMED;
+            const path = '/shopping_list/confirm_item';
+            this._fetch(path, {
+                method: 'POST',
+                body: JSON.stringify({ shopping_item_id: item.id }),
+            })
+            .then(() => {
+                this.shopping_items = this.shopping_items.filter(i => i.id !== item.id);
+            })
+        },
+        remove(item) {
+            item.type = item_types.REMOVED;
             const path = '/shopping_list/remove_item';
             this._fetch(path, {
                 method: 'POST',
@@ -111,6 +134,7 @@ export default {
             })
             .then(response => response.json())
             .then(data => {
+                data.type = item_types.DEFAULT;
                 this.shopping_items.push(data);
                 this.new_name = null;
                 this.new_quantity = null;

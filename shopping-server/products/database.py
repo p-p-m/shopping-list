@@ -1,3 +1,8 @@
+"""
+Shopping list <--- M2M via ShoppingItem ---> Product
+Recipe        <--- M2M via RecipeItem   ---> Product
+"""
+
 from sqlalchemy import func
 
 from . import db
