@@ -24,13 +24,13 @@
         <br />
         <br />
         <ul class="list-group">
-            <li class="list-group-item d-flex justify-content-between border-0 my-1 p-0 align-text-bottom" v-for="item in shopping_items" v-bind:key="item.id">
-                <button type="button" class="btn btn-light text-danger" @click=remove(item)>❌</button>
-                <div class="align-self-center">
+            <li class="list-group-item d-flex border-0 my-1 p-0 align-text-bottom" v-for="item in shopping_items" v-bind:key="item.id">
+                <button type="button" class="btn btn-light text-danger p-2" @click=remove(item)>❌</button>
+                <div class="p-2">
                     {{ item.name }} - {{ parseFloat(item.quantity).toFixed(3) }}
-                    <small v-if="item.measurement">{{ item.measurement }} {{ item.type }}</small>
+                    <small v-if="item.measurement">{{ item.measurement }}</small>
                 </div>
-                <button type="button" class="btn btn-light text-success" @click=confirm(item)>✔</button>
+                <button type="button" class="btn btn-light text-success ml-auto p-2" @click=confirm(item)>✔</button>
             </li>
         </ul>
     </div>
